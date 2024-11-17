@@ -1,4 +1,4 @@
-from unicodedata import digit
+from vazifalar.oop_read_txt import get_user_number
 
 
 class Person:
@@ -18,7 +18,7 @@ class Person:
         return f"{self._birth_day:02d}-{self._birth_month:02d}-{self._birth_year}"
 
     def get_info(self):
-        return f"Ism: {self.first_name}\nSharifi: {self.last_name}\nYosh: {self.age}\nEmail: {self.email}\nTavallud: {self.birth_date}"
+        return f"Ism: {self.first_name}\nSharif: {self.last_name}\nYosh: {self.age}\nEmail: {self.email}\nTavallud: {self.birth_date}"
 
     def get_life_path_number(self):
         birth_date = sum(int(digit) for digit in str(self._birth_day))
@@ -26,15 +26,21 @@ class Person:
         birth_year = sum(int(digit) for digit in str(self._birth_year))
         first_result = birth_date + birth_month + birth_year
         final_result = sum(int(digit) for digit in str(first_result))
-        return f"{self.first_name}ni life_path_numberi bu {final_result}"
+        return final_result
 
 
-person = Person("Hasan", "ibn Husan", 25, "hasanhusan@example.com", 2000, 6, 15)
-# print(person.first_name)
-# print(person.last_name)
-# print(person.age)
-# print(person.email)
-# print(person.birth_day)
+get_first_name = input("Ismingizni kiriting: ")
+get_last_name = input("Sharifingizni kiriting: ")
+get_age = int(input("Yoshingizni kiriting: "))
+get_email = input("Emailingizni kiriting: ")
+get_birth_day = int(input("Tug'ilgan kuningizni kiriting (dd): "))
+get_birth_month = int(input("Tug'ilgan oyingizni kiriting (mm): "))
+get_birth_year = int(input("Tug'ilgan yilingizni kiriting (yyyy): "))
 
-# print(person.get_info())
-print(person.get_life_path_number())
+person = Person(get_first_name, get_last_name, get_age, get_email, get_birth_year, get_birth_month, get_birth_day)
+info = person.get_info()
+life_number = person.get_life_path_number()
+tarif = get_user_number(filename="hayot_yuli.txt", number=str(life_number))
+print(f"\n\nShaxsiy ma'lumotlaringiz:\n{info}")
+print(f"Sizning life_path_numberingiz: {life_number}")
+print(f"Numerologiya bo'yicha Sizga beriladigan ta'rif: {tarif}")
